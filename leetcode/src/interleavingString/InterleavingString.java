@@ -15,8 +15,89 @@
 package interleavingString;
 
 public class InterleavingString {
-    // TODO: substring 대신 index 를 넘겨주는 방식으로 변경
+    // 105 / 106 test cases passed.
     public boolean isInterleave(String s1, String s2, String s3) {
+        if (s1.length() + s2.length() != s3.length()) {
+            return false;
+        }
+
+        return isInterleave(s1, 0, s2, 0, s3, 0);
+    }
+
+    private boolean isInterleave(String s1, int i1, String s2, int i2, String s3, int i3) {
+        if (i3 == s3.length()) {
+            return true;
+        }
+
+        if (i1 < s1.length() && s3.charAt(i3) == s1.charAt(i1)) {
+            boolean firstResult = isInterleave(s1, i1+1, s2, i2, s3, i3+1);
+            if (firstResult) {
+                return true;
+            }
+        }
+        if (i2 < s2.length() && s3.charAt(i3) == s2.charAt(i2)) {
+            return isInterleave(s1, i1, s2, i2+1, s3, i3+1);
+        }
+        return false;
+    }
+
+
+    public boolean isInterleaveWithLongTime2(String s1, String s2, String s3) {
+        if (s1.length() + s2.length() != s3.length()) {
+            return false;
+        }
+
+        return isInterleaveWithLongTime2(s1, 0, s2, 0, s3, 0);
+    }
+
+    private boolean isInterleaveWithLongTime2(String s1, int i1, String s2, int i2, String s3, int i3) {
+        if (i3 == s3.length()) {
+            return true;
+        }
+
+        if (i1 < s1.length() && s3.charAt(i3) == s1.charAt(i1)) {
+            int count = countUntilNotSame(s1, i1, s3, i3);
+            while(count > 0) {
+                boolean result = isInterleaveWithLongTime2(s1, i1+count, s2, i2, s3, i3+count);
+                if (result) {
+                    return true;
+                }
+                count--;
+            }
+        }
+        if (i2 < s2.length() && s3.charAt(i3) == s2.charAt(i2)) {
+            int count = countUntilNotSame(s2, i2, s3, i3);
+            while(count > 0) {
+                boolean result = isInterleaveWithLongTime2(s1, i1, s2, i2+count, s3, i3+count);
+                if (result) {
+                    return true;
+                }
+                count--;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @param s1 "aabcc"
+     * @param i1 2
+     * @param s2 "aadbbcbcbcac"
+     * @param i2 6
+     * @return 2
+     */
+    public int countUntilNotSame(String s1, int i1, String s2, int i2) {
+        int count = 0;
+        while (i1 < s1.length() && i2 < s2.length() && s1.charAt(i1) == s2.charAt(i2)) {
+            count++;
+            i1++;
+            i2++;
+        }
+
+        return count;
+    }
+
+    // TODO: substring 대신 index 를 넘겨주는 방식으로 변경
+    public boolean isInterleaveWithOldTime(String s1, String s2, String s3) {
         if (s1.length() + s2.length() != s3.length()) {
             return false;
         }

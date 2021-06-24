@@ -46,7 +46,7 @@ class InterleavingStringTest {
 
     /**
      * Input: s1 = "ab", s2 = "c", s3 = "abb"
-     * Output: true
+     * Output: false
      */
     @Test
     void test2() {
@@ -64,7 +64,7 @@ class InterleavingStringTest {
 
     /**
      * Input: s1 = "a", s2 = "b", s3 = "a"
-     * Output: true
+     * Output: false
      */
     @Test
     void test4() {
@@ -72,9 +72,46 @@ class InterleavingStringTest {
     }
 
     /**
-     * "bbbbbabbbbabaababaaaabbababbaaabbabbaaabaaaaababbbababbbbbabbbbababbabaabababbbaabababababbbaaababaa"
-     * "babaaaabbababbbabbbbaabaabbaabbbbaabaaabaababaaaabaaabbaaabaaaabaabaabbbbbbbbbbbabaaabbababbabbabaab"
-     * "babbbabbbaaabbababbbbababaabbabaabaaabbbbabbbaaabbbaaaaabbbbaabbaaabababbaaaaaabababbababaababbababbbababbbbaaaabaabbabbaaaaabbabbaaaabbbaabaaabaababaababbaaabbbbbabbbbaabbabaabbbbabaaabbababbabbabbab"
+     * "aabcc"
+     * "dbbca"
+     * "aadbcbbcac"
      */
+    @Test
+    void test5() {
+        assertTrue(interleavingString.isInterleave("aabcc", "dbbca", "aadbcbbcac"));
+    }
+
+
+    /**
+     * Time Exceed Input
+     * "abababababababababababababababababababababababababababababababababababababababababababababababababbb"
+     * "babababababababababababababababababababababababababababababababababababababababababababababababaaaba"
+     * "abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababbb"
+     */
+
+    /**
+     * @param s1 "aabcc"
+     * @param i1 2
+     * @param s2 "aadbbcbcbcac"
+     * @param i2 6
+     * @return 2
+     */
+    @Test
+    void countUntilNotSameTest1() {
+        assertEquals(2, interleavingString.countUntilNotSame("aabcc", 2, "aadbbcbcbcac", 6));
+    }
+
+    /**
+     * @param s1 "ab"
+     * @param i1 0
+     * @param s2 "abb"
+     * @param i2 0
+     * @return 2
+     */
+    @Test
+    void countUntilNotSameTest2() {
+        assertEquals(2, interleavingString.countUntilNotSame("aabcc", 2, "aadbbcbcbcac", 6));
+    }
+
 
 }
