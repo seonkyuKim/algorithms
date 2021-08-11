@@ -78,6 +78,7 @@ public class InterleavingString {
         return false;
     }
 
+    // count 를 함수 안에서 다음 string 의 시작이 있을때까지만 세는 방식으로 바꿔보면 될듯 test 5인가 실패했던거 참고
     /**
      * @param s1 "aabcc"
      * @param i1 2
